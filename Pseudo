@@ -1,0 +1,73 @@
+Algoritmo Medicion
+	// definimos los parametros que vamos a usar, condiciones actuales e ideales y si el sistema esta activo
+	Definir ideal, actual Como Real
+	Definir activo Como Logico
+	//el sistema inicia activo y los datos de la temperatura ideal los da la calibracion ingresando al sistema datos fijos
+	activo <- Verdadero
+	Leer ideal
+	//Mientras el sistema este activo quiero que el sensor monitoree las condiciones actuales, pero tener control para apagar el sistema
+	Mientras activo == Verdadero Hacer
+		Leer activo
+		Leer actual
+		graficar(actual)
+		// Si las condiciones son diferentes de las ideales, quiero que el sistema se active
+		Si actual <> ideal
+			activacion (actual, ideal)
+		FinSi
+	Fin Mientras
+FinAlgoritmo
+//
+
+//
+Algoritmo Graficar
+	Escribir "la temperatura es de: ",temperaturaActual, " a las" HoraActual()
+	Escribir "la luminocidad es de: ",luminocidadActual, " a las" HoraActual()
+	Escribir "la humedad es de: ",humedadActual, " a las" HoraActual()
+FinAlgoritmo
+//
+
+//
+Algoritmo Activacion
+	//Mientras las condiciones actuales sean diferentes de las ideales necesito que tome acciones correctivas
+	Mientras actual <> ideal Hacer
+		Segun actual Hacer
+			//Si lo diferente es la temperatura
+			temperaturaActual <> temperaturaIdeal:
+				Segun temperaturaActual Hacer
+						//si hay frio
+					temperaturaActual < temperaturaIdeal:
+						iniciarCalefaccion
+						//si hay calor
+					temperaturaActual > temperaturaIdeal:
+						IniciarRefrigeracion
+						//apagar el sistema
+					De Otro Modo:
+						ApagarCalefaccion
+						ApagarRefrigeracion
+				Fin Segun
+			//si lo difernte es la humedad
+			humedadActual <> humedadIdeal:
+				Si humedadActual < humedadIdeal
+					//Si esta muy seco
+					iniciarRiego
+				SiNo
+					apagarRiego
+				Fin Si
+			//si lo diferente es la iluminacion
+			iluminacionActual <> iluminacionIdeal:
+				//si hay menos luz
+				SI iluminacionActual < iluminacionIdeal
+					iniciarLuces
+				//si hay mas luz
+				SiNo
+					apagarLuces
+				Fin Si
+			De Otro Modo:
+				ApagarCalefaccion
+				ApagarRefrigera
+				apagarRiego
+				apagarLuces
+		Fin Segun
+		//si la temperatura es difente, necesitamos que caliente o enfrie dependiendo de las condiciones y cuando termine que apague el proceso		
+	Fin Mientras	
+FinAlgoritmo

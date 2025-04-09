@@ -1,4 +1,4 @@
-1. NOmbre: SmartHouse
+1. Nombre: SmartHouse
 	Problema que resuelve: COndiciones ambientales en constante cambio y necesidad de estar presente para el cuidado del cultivo
 	Solución: Automatizar el cuidado del cultivo
 	Público objetivo: Agricultores pequeños y medianos
